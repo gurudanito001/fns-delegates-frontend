@@ -1,3 +1,3 @@
 module.exports = {
-    serverUrl: "https://immense-escarpment-51849.herokuapp.com/api"
+    serverUrl: "http://localhost:8080/api/delegate"
 }

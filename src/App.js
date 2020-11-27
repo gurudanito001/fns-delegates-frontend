@@ -1,96 +1,77 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from './components/login';
-import Register from './components/register';
-import CreateReview from './components/createReview';
+import axios from 'axios';
+import { serverUrl } from './config';
+import AddDelegate from './components/addDelegate';
 import Navbar from './components/navbar';
-import Reviews from './components/reviews';
-import Homepage from './components/homepage';
-import PendingValidation from './components/pendingValidation';
-import jwt_decode from "jwt-decode";
+import AdmittedAttendees from './components/admittedAttendees';
+import AllDelegates from './components/allDelegates';
 
 export default class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      errors: {},
-      currentUser: {}
+      ready: false,
+      searchResults: [],
+      admittedAttendees: [],
+      vipAttendees: []
     }
   }
+
   componentDidMount = ()=>{
-    this.setCurrentUserFromLocalStorage()
-  }
-  setCurrentUser = (userDetails)=>{
-    this.setState({ currentUser: userDetails })
-  }
-
-  setCurrentUserFromLocalStorage = ()=>{
-    let token = localStorage.getItem("jwtToken");
-    if(token){
-      const decoded = jwt_decode(token);
-      this.setState({currentUser: decoded})
-      console.log(token)
-    }
+    axios.post("http://localhost:8080/wakeup")
+      .then(res => {
+        if(res.statusText === "OK"){
+          this.setState({ ready: true })
+        } 
+      })
+    this.getAdmittedAttendees()
   }
 
-  saveUserLocalStorage = (token)=>{
-    localStorage.setItem( "jwtToken", token )
+  getAdmittedAttendees = ()=>{
+    axios.get(`${serverUrl}/admitted`)
+      .then(res => {
+        if(res.statusText === "OK"){
+          this.setState({ admittedAttendees: res.data })
+        }
+      })
   }
 
-  logUserOut = ()=>{
-    this.setState({ currentUser: {}}, console.log(this.state))
-    localStorage.clear()
+  storeSearchResults = (results)=>{
+    this.setState({ searchResults: results })
   }
 
-  setErrors = (err)=>{
-    this.setState({errors: err})
-  }
-  displayErrors = ()=>{
-    let errors = Object.values(this.state.errors);
-    return errors.map(err => {
-        return(
-          <div className="alert alert-warning alert-dismissible fade show" role="alert" style={{maxWidth: "300px"}}>
-            <strong>{err}!</strong>
-            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        )
-    });
-  }
-
-  
 
   render(){
     return(
+      this.state.ready ? 
+      <div className="app">
         <Router>
-          <Navbar 
-          logUserOut={this.logUserOut}
-          currentUser={this.state.currentUser}
-          />
-          <div className="container">
-            {this.displayErrors()}
-            <Switch>
-              <Route path="/reviews-frontend/" exact component={Homepage} />
-              <Route path="/reviews-frontend/reviews" exact component={Reviews} />
-              <Route path="/reviews-frontend/pendingValidation">
-                 <PendingValidation 
-                 currentUser={this.state.currentUser}/>
-              </Route>
-            </Switch>
-          </div>
-          
-          <Login 
-            saveUserLocalStorage={this.saveUserLocalStorage}
-            setCurrentUser={this.setCurrentUser } 
-            setErrors={this.setErrors}/>
-          <Register 
-          setErrors={this.setErrors}/>
-          <CreateReview 
-          currentUser={this.state.currentUser}/>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact>
+              <AllDelegates 
+              searchResults={this.state.searchResults}
+              storeSearchResults={this.storeSearchResults}/>
+            </Route>
+            <Route path="/admitted" exact>
+              <AdmittedAttendees 
+              admittedAttendees={this.state.admittedAttendees}
+              getAdmittedAttendees={this.getAdmittedAttendees}/>
+            </Route>
+          </Switch>
+
+
+          <AddDelegate />
         </Router>
+      </div> :
+      <div className="text-center border border-primary d-flex align-items-center justify-content-center" style={{height: "100vh"}}>
+          <div className="spinner-border text-primary" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+          <span className="h4 ml-3 mt-2">Getting things ready</span>
+      </div>
     )
   }
 }
