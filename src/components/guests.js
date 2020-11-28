@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { serverUrl } from '../config';
 import Delegate from './delegate';
 
-export default class AdmittedAttendees extends React.Component{
+export default class Guests extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -14,15 +14,15 @@ export default class AdmittedAttendees extends React.Component{
     }
 
     componentDidMount = ()=>{
-        this.props.getAdmittedAttendees()
+        this.props.getGuests()
     }
-    
+
     makeDelegate = (e, id)=>{
         axios.post(`${serverUrl}/makedelegate/${id}`)
         .then( res =>{
             console.log(res)
             if(res.statusText === "OK"){
-                this.props.getAdmittedAttendees()
+                this.props.getGuests()
                 console.log("Guest is now a Delegate")
             }
         })
@@ -33,7 +33,7 @@ export default class AdmittedAttendees extends React.Component{
         .then( res =>{
             console.log(res)
             if(res.statusText === "OK"){
-                this.props.getAdmittedAttendees()
+                this.props.getGuests()
                 console.log("Delegate is now a Guest")
             }
         })
@@ -43,7 +43,7 @@ export default class AdmittedAttendees extends React.Component{
         axios.post(`${serverUrl}/admit/${id}`)
         .then( res =>{
             if(res.statusText === "OK"){
-                this.props.getAdmittedAttendees()
+                this.props.getGuests()
                 console.log("Attendee has now been Admitted")
             }
         })
@@ -53,7 +53,7 @@ export default class AdmittedAttendees extends React.Component{
         axios.post(`${serverUrl}/exclude/${id}`)
         .then( res =>{
             if(res.statusText === "OK"){
-                this.props.getAdmittedAttendees()
+                this.props.getGuests()
                 console.log("Attendee has now been Excluded")
             }
         })
@@ -63,7 +63,7 @@ export default class AdmittedAttendees extends React.Component{
         axios.delete(`${serverUrl}/delete/${id}`)
         .then( res =>{
             if(res.statusText === "OK"){
-                this.getAdmittedAttendees()
+                this.props.getGuests()
                 console.log("Attendee has now been Deleted")
             }
         })
@@ -79,24 +79,20 @@ export default class AdmittedAttendees extends React.Component{
                 <div className="row mb-4">
                     <div className="col col-lg-6 offset-lg-3 px-0">
                         <header>
-                            <h4>Admitted Attendees</h4>
+                            <h4>All Guests</h4>
                         </header>
                     </div>
                 </div>
-                {
-                    this.props.admittedAttendees ? 
-                        <div className="card-deck">
-                            <Delegate
-                                delegates={this.props.admittedAttendees}
-                                makeDelegate={this.makeDelegate}
-                                makeGuest={this.makeGuest}
-                                admit={this.admit}
-                                exclude={this.exclude} 
-                                deleteDelegate={this.delete}/>
-                        </div> :
-                        <div> No delegate has been admitted </div>
-                }
-                
+
+                <div className="card-deck">
+                    <Delegate 
+                    delegates={this.props.guests} 
+                    makeDelegate={this.makeDelegate}
+                    makeGuest={this.makeGuest}
+                    exclude={this.exclude}
+                    admit={this.admit}
+                    deleteDelegate={this.delete}/>
+                </div>
             </div>
         )
     }

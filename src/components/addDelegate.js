@@ -65,10 +65,10 @@ export default class AddDelegate extends React.Component{
                                     <label htmlFor="lastname">Lastname</label>
                                     <input type="text" className="form-control form-control-sm" id="lastname" onChange={this.onChange} />
                                 </div>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label htmlFor="email">Email address</label>
                                     <input type="email" className="form-control form-control-sm" id="email" onChange={this.onChange} />
-                                </div>
+                                </div> */}
                                 <div className="form-group">
                                     <label htmlFor="phoneNumber">Phone Number</label>
                                     <input type="text" className="form-control form-control-sm" id="phoneNumber" onChange={this.onChange}/>
@@ -77,14 +77,14 @@ export default class AddDelegate extends React.Component{
                                     <label htmlFor="companyName">Company Name</label>
                                     <input type="text" className="form-control form-control-sm" id="companyName" onChange={this.onChange} />
                                 </div>
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <label htmlFor="serviceDescription">Service Description</label>
                                     <input type="text" className="form-control form-control-sm" id="serviceDescription" onChange={this.onChange}/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="companyAddress">Company Address</label>
                                     <input type="text" className="form-control form-control-sm" id="companyAddress" onChange={this.onChange} />
-                                </div>
+                                </div> */}
                                 <div className="form-group">
                                     <div className="form-check">
                                         <input className="form-check-input" type="checkbox" checked={this.state.vip} onChange={this.onChange} id="vip" />
