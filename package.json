@@ -2,6 +2,7 @@
   "name": "reviews-front",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://gurudanito001.github.io/fns-delegates-frontend/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",

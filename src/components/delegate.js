@@ -30,10 +30,10 @@ const Delegate = (props)=>{
 
                             
 
-                            {   delegate.vip ? 
+                            {/* {   delegate.vip ? 
                                 <button className="btn btn-sm btn-danger float-left" onClick={(event)=>{props.makeDelegate(event, delegate._id)}}>Make Delegate</button> :
                                 <button className="btn btn-sm btn-success float-left" onClick={(event)=>{props.makeGuest(event, delegate._id)}}>Make Guest</button>
-                            }
+                            } */}
                             
                             {   delegate.admitted ? 
                                 <button className="btn btn-sm btn-danger float-right" onClick={(event)=>{props.exclude(event, delegate._id)}}>Exclude</button> :

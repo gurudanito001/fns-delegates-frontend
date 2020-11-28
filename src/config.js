@@ -1,3 +1,3 @@
 module.exports = {
-    serverUrl: "http://localhost:8080/api/delegate"
+    serverUrl: "https://agile-citadel-65482.herokuapp.com/api/delegate"
 }
