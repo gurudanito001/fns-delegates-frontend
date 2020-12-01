@@ -11,13 +11,13 @@ const Delegate = (props)=>{
                         <div className="card-body">
                             <div className="clearfix">
                                 <span className="mr-2 d-inline-block float-left"><strong> Full Name: </strong>{delegate.firstname + " " + delegate.lastname }</span> 
-                                <div className="dropdown float-right border d-inline-block" >
+                               {/*  <div className="dropdown float-right border d-inline-block" >
                                     <button className="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </button>
                                     <div className="dropdown-menu dropdown-menu-right py-0" aria-labelledby="dropdownMenuButton">
                                         <button className="dropdown-item bg-danger text-white rounded" href="#" onClick={(event)=>{props.deleteDelegate(event, delegate._id)}}>Delete</button>
                                     </div> 
-                                </div>
+                                </div> */}
                             </div>
 
                             

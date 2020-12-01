@@ -98,22 +98,20 @@ export default class AllDelegates extends React.Component{
 
     render(){
         return(
-            <div className="container px-0">
+            <div className="container">
                 <div className="row mb-4">
-                    <div className="col col-lg-6 offset-lg-3 px-0">
-                        <header>
+                    <header className="col col-lg-6 offset-lg-3">
                             <h4>Search All Attendees</h4>
-                        </header>
-                        <form className="form-inline my-2 my-lg-0 mx-auto">
-                            <select className="form-control p-0" style={{maxWidth: "6rem"}} value={this.state.searchOption} onChange={this.onChange} id="searchOption">
+                        <form className="form-inline my-2 my-lg-0">
+                            <select className="form-control p-0" style={{maxWidth: "5rem"}} value={this.state.searchOption} onChange={this.onChange} id="searchOption">
                                 <option value="firstname">firstname</option>
                                 <option value="lastname">lastname</option>
                                 <option value="email">email</option>
                             </select>
-                            <input className="form-control mr-sm-2" type="search" style={{minWidth: "18rem"}} placeholder="Search" id="searchText" onChange={this.onChange} />
+                            <input className="form-control mr-sm-2" type="search" placeholder="Search" id="searchText" onChange={this.onChange} />
                             <button className="btn btn-success my-2 my-sm-0" type="submit" disabled={this.state.searching} onClick={this.search}>Search</button>
                         </form>
-                    </div>
+                    </header>
                 </div>
 
                 <div className="card-deck">

@@ -75,13 +75,11 @@ export default class Guests extends React.Component{
 
     render(){
         return(
-            <div className="container px-0">
+            <div className="container">
                 <div className="row mb-4">
-                    <div className="col col-lg-6 offset-lg-3 px-0">
-                        <header>
-                            <h4>All Guests</h4>
-                        </header>
-                    </div>
+                    <header className="col col-lg-6 offset-lg-3">
+                     <h4>All Guests ({this.props.guests.length})</h4>
+                    </header>
                 </div>
 
                 <div className="card-deck">

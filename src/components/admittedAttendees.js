@@ -16,7 +16,7 @@ export default class AdmittedAttendees extends React.Component{
     componentDidMount = ()=>{
         this.props.getAdmittedAttendees()
     }
-    
+
     makeDelegate = (e, id)=>{
         axios.post(`${serverUrl}/makedelegate/${id}`)
         .then( res =>{
@@ -75,16 +75,14 @@ export default class AdmittedAttendees extends React.Component{
 
     render(){
         return(
-            <div className="container px-0">
+            <div className="container">
                 <div className="row mb-4">
-                    <div className="col col-lg-6 offset-lg-3 px-0">
-                        <header>
-                            <h4>Admitted Attendees</h4>
-                        </header>
-                    </div>
+                    <header className="col col-lg-6 offset-lg-3">
+                        <h4>Admitted Attendees</h4>
+                    </header>
                 </div>
                 {
-                    this.props.admittedAttendees ? 
+                    this.props.admittedAttendees[0] ? 
                         <div className="card-deck">
                             <Delegate
                                 delegates={this.props.admittedAttendees}
@@ -94,7 +92,7 @@ export default class AdmittedAttendees extends React.Component{
                                 exclude={this.exclude} 
                                 deleteDelegate={this.delete}/>
                         </div> :
-                        <div> No delegate has been admitted </div>
+                        <div> No Attendee has been admitted </div>
                 }
                 
             </div>

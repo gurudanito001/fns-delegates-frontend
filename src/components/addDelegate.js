@@ -65,10 +65,10 @@ export default class AddDelegate extends React.Component{
                                     <label htmlFor="lastname">Lastname</label>
                                     <input type="text" className="form-control form-control-sm" id="lastname" onChange={this.onChange} />
                                 </div>
-                                {/* <div className="form-group">
+                                <div className="form-group">
                                     <label htmlFor="email">Email address</label>
                                     <input type="email" className="form-control form-control-sm" id="email" onChange={this.onChange} />
-                                </div> */}
+                                </div> 
                                 <div className="form-group">
                                     <label htmlFor="phoneNumber">Phone Number</label>
                                     <input type="text" className="form-control form-control-sm" id="phoneNumber" onChange={this.onChange}/>

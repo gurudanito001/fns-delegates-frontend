@@ -22,14 +22,15 @@ export default class App extends React.Component{
   }
 
   componentDidMount = ()=>{
-    axios.post("http://localhost:8080/wakeup")
+    axios.post("https://agile-citadel-65482.herokuapp.com/wakeup")
       .then(res => {
         if(res.statusText === "OK"){
           this.setState({ ready: true })
+          this.getAdmittedAttendees()
+          this.getGuests()
         } 
       })
-    this.getAdmittedAttendees()
-    this.getGuests()
+    
   }
 
   setCurrentPage = (page)=>{
@@ -128,7 +129,7 @@ export default class App extends React.Component{
           <div className="spinner-border text-primary" role="status">
             <span className="sr-only">Loading...</span>
           </div>
-          <span className="h4 ml-3 mt-2">Getting things ready</span>
+          <span className="h4 ml-3 mt-2">App is loading</span>
       </div>
     )
   }
